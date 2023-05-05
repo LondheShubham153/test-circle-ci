@@ -15,7 +15,13 @@ jobs:
     steps:
       - checkout
       - run: python tests.py
-
+  deploy:
+    working_directory: ~/circleci-python
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run: echo "deployed"
 workflows:
   build_and_test:
     jobs:
@@ -23,3 +29,4 @@ workflows:
       - test:
           requires:
             - build
+      - deploy
