@@ -2,24 +2,24 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/circleci-test
+    working_directory: ~/circleci-python
     docker:
       - image: cimg/python:3.11
     steps:
       - checkout
       - run: python main.py
   test:
-    working_directory: ~/circleci-test
+    working_directory: ~/circleci-python
     docker:
       - image: cimg/python:3.11
     steps:
       - checkout
-      - run: python test.py
+      - run: python tests.py
 
 workflows:
   build_and_test:
     jobs:
       - build
       - test:
-        requires:
-          - build
+          requires:
+            - build
